@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: esencia-store
+    runtime: docker
+    plan: free
+    autoDeployTrigger: commit
+    healthCheckPath: /
+    envVars:
+      - key: APP_NAME
+        value: Esencia Store
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_URL
+        sync: false
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: DB_DATABASE
+        value: /var/www/html/database/database.sqlite
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: WHATSAPP_NUMBER
+        value: "573204278383"
