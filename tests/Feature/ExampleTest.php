@@ -18,4 +18,15 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_assets_use_forwarded_https_behind_a_proxy(): void
+    {
+        $response = $this->withServerVariables([
+            'HTTP_X_FORWARDED_PROTO' => 'https',
+            'HTTP_X_FORWARDED_HOST' => 'esencia-store.onrender.com',
+        ])->get('/');
+
+        $response->assertOk();
+        $response->assertSee('https://esencia-store.onrender.com/build/assets/', false);
+    }
 }
